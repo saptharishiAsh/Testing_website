@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rishi Mart | A friendly test store</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#shop-section" aria-label="Rishi Mart home">
+      <span class="brand-mark">RM</span>
+      <span>rishi<span>mart</span></span>
+    </a>
+    <nav class="header-actions" aria-label="Store navigation">
+      <button class="text-button" id="account-button" type="button">Sign in</button>
+      <button class="cart-button" id="cart-button" data-testid="cart-button" type="button" aria-label="Shopping bag">
+        <span aria-hidden="true">Bag</span>
+        <span id="cart-count" class="cart-count">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="auth-section" class="auth-layout" data-testid="login-section">
+      <div class="auth-intro">
+        <p class="eyebrow">Welcome to Rishi Mart</p>
+        <h1>Useful things<br /><em>for everyday life.</em></h1>
+        <p>Shop simple tech, home and lifestyle products at fair prices.</p>
+        <div class="trust-row"><span>Free delivery over ₹5,000</span><span>Easy returns</span></div>
+      </div>
+      <div class="auth-panel">
+        <div class="auth-tabs" role="tablist" aria-label="Account access">
+          <button class="auth-tab active" id="login-tab" type="button" role="tab">Log in</button>
+          <button class="auth-tab" id="signup-tab" type="button" role="tab">Create account</button>
+        </div>
+        <div id="login-view">
+          <h2>Welcome back</h2>
+          <p class="muted">Use the account you create to explore the store.</p>
+          <form id="login-form" class="stack-form">
+            <label>Email<input id="email" type="email" placeholder="you@example.com" autocomplete="email" required /></label>
+            <label>Password<input id="password" type="password" placeholder="At least 6 characters" autocomplete="current-password" required /></label>
+            <button class="primary-button" type="submit">Enter the store <span>→</span></button>
+          </form>
+        </div>
+        <div id="signup-view" hidden>
+          <h2>Make an account</h2>
+          <p class="muted">A few details, then you are ready to shop.</p>
+          <form id="signup-form" class="stack-form">
+            <label>
+              Full name
+              <input id="signup-name" type="text" placeholder="Your Name" required />
+            </label>
+            <label>
+              Account email
+              <input id="signup-email" type="email" placeholder="you@example.com" autocomplete="email" required />
+            </label>
+            <label>
+              Password
+              <input id="signup-password" type="password" placeholder="At least 6 characters" minlength="6" required />
+            </label>
+            <label>
+              Phone <span class="optional">(optional)</span>
+              <input id="signup-phone" type="tel" placeholder="+1 555 000 0000" />
+            </label>
+            <button class="primary-button" type="submit">Create account <span>→</span></button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="shop-section" class="shop-section" hidden>
+      <div class="shop-hero">
+        <div>
+          <p class="eyebrow">Shop all products</p>
+          <h1>What are you<br /><em>looking for?</em></h1>
+          <p class="muted">Browse our latest products and add something to your bag.</p>
+        </div>
+        <div class="member-pill">
+          <span class="status-dot"></span>
+          <span id="member-name">Guest</span>
+          <button id="logout-button" type="button">Log out</button>
+        </div>
+      </div>
+      <div class="catalog-toolbar">
+        <label class="search-field">
+          <span aria-hidden="true">⌕</span>
+          <input id="search-input" type="search" placeholder="Search products" />
+        </label>
+        <div class="filter-group" role="group" aria-label="Filter products">
+          <button class="filter-button active" data-category="all" type="button">All</button>
+          <button class="filter-button" data-category="tech" type="button">Tech</button>
+          <button class="filter-button" data-category="home" type="button">Home</button>
+          <button class="filter-button" data-category="style" type="button">Style</button>
+        </div>
+        <label class="sort-field">
+          Sort
+          <select id="sort-select">
+            <option value="featured">Featured</option>
+            <option value="low">Price: low to high</option>
+            <option value="high">Price: high to low</option>
+          </select>
+        </label>
+      </div>
+      <div id="products" class="products"></div>
+      <p id="empty-products" class="empty-state" hidden>No products match that search. Try another phrase.</p>
+    </section>
+
+    <section id="cart-section" class="drawer-section" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Ready when you are</p>
+          <h2>Your shopping bag</h2>
+        </div>
+        <button class="close-button" id="continue-shopping" type="button" aria-label="Continue shopping">×</button>
+      </div>
+      <div id="cart-items" class="cart-items"></div>
+      <div class="cart-summary">
+        <span>Subtotal</span>
+        <strong id="cart-total">$0.00</strong>
+      </div>
+      <button class="primary-button full-button" id="checkout-button" type="button">Continue to checkout <span>→</span></button>
+    </section>
+
+    <section id="checkout-section" class="checkout-layout" hidden>
+      <div>
+        <p class="eyebrow">Almost there</p>
+        <h2>Finish your order</h2>
+        <p class="muted">This demo uses a safe test payment flow. No real charge will be made.</p>
+        <div class="order-mini" id="checkout-items"></div>
+      </div>
+      <div class="checkout-panel">
+        <form id="checkout-form" class="stack-form">
+          <label>
+            Delivery name
+            <input id="customer-name" type="text" placeholder="Name on the order" required />
+          </label>
+          <label>
+            Country
+            <input id="country" type="text" placeholder="United States" required />
+          </label>
+          <label>
+            Card number
+            <input id="card-number" type="text" inputmode="numeric" placeholder="4242 4242 4242 4242" minlength="12" required />
+          </label>
+          <div class="form-row">
+            <label>
+              Expiry
+              <input id="expiry" type="text" placeholder="MM/YY" required />
+            </label>
+            <label>
+              CVV
+              <input id="cvv" type="text" inputmode="numeric" placeholder="123" minlength="3" required />
+            </label>
+          </div>
+          <button class="primary-button full-button" type="submit">Pay <span id="payment-total">$0.00</span></button>
+        </form>
+      </div>
+    </section>
+
+    <section id="confirmation-section" class="confirmation-section" hidden>
+      <div class="success-icon">✓</div>
+      <p class="eyebrow">Payment successful</p>
+      <h2 data-testid="confirmation-message">Thank you for your order!</h2>
+      <p class="muted">Your new favorites are on their way.</p>
+      <p id="order-number" class="order-number"></p>
+      <button class="primary-button" id="back-to-shop" type="button">
+        Keep shopping <span>→</span>
+      </button>
+    </section>
+
+    <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+  </main>
+
+  <script src="app.js?v=3"></script>
+</body>
+</html>
