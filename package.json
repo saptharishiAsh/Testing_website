@@ -1,0 +1,12 @@
+{
+  "name": "rishi-mart-test-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Rishi Mart storefront and local integration test playground",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

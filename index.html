@@ -80,6 +80,7 @@
           <span class="status-dot"></span>
           <span id="member-name">Guest</span>
           <button id="logout-button" type="button">Log out</button>
+          <button id="open-integrations" class="integration-link" type="button">Test integrations</button>
         </div>
       </div>
       <div class="catalog-toolbar">
@@ -92,6 +93,9 @@
           <button class="filter-button" data-category="tech" type="button">Tech</button>
           <button class="filter-button" data-category="home" type="button">Home</button>
           <button class="filter-button" data-category="style" type="button">Style</button>
+          <button class="filter-button" data-category="books" type="button">Books</button>
+          <button class="filter-button" data-category="beauty" type="button">Beauty</button>
+          <button class="filter-button" data-category="sports" type="button">Sports</button>
         </div>
         <label class="sort-field">
           Sort
@@ -104,6 +108,63 @@
       </div>
       <div id="products" class="products"></div>
       <p id="empty-products" class="empty-state" hidden>No products match that search. Try another phrase.</p>
+      <nav class="pagination" aria-label="Product pages">
+        <button id="previous-page" class="page-button" type="button" aria-label="Previous page">←</button>
+        <span id="page-status">Page 1 of 1</span>
+        <button id="next-page" class="page-button" type="button" aria-label="Next page">→</button>
+      </nav>
+    </section>
+
+    <section id="integration-section" class="integration-section" hidden>
+      <div class="section-heading integration-heading">
+        <div>
+          <p class="eyebrow">Local test workspace</p>
+          <h2>Integrations &amp; API lab</h2>
+          <p class="muted">Safe mock services for UI, API, webhook and security test practice.</p>
+        </div>
+        <button id="close-integrations" class="close-button" type="button" aria-label="Close integrations">×</button>
+      </div>
+      <div class="integration-grid">
+        <article class="integration-card" data-testid="amazon-integration">
+          <div class="integration-icon">AMZ</div>
+          <div><h3>Amazon Marketplace</h3><p>Simulate inventory and order sync without leaving this browser.</p></div>
+          <button class="secondary-button" id="amazon-sync" type="button">Sync products</button>
+          <p id="amazon-status" class="integration-status">Ready to connect</p>
+        </article>
+        <article class="integration-card">
+          <div class="integration-icon stripe-icon">PAY</div>
+          <div><h3>Payment provider</h3><p>Exercise success, decline and validation states.</p></div>
+          <button class="secondary-button" id="payment-health" type="button">Check health</button>
+          <p id="payment-status" class="integration-status">Not checked</p>
+        </article>
+        <article class="integration-card" data-testid="email-integration">
+          <div class="integration-icon email-icon">MAIL</div>
+          <div><h3>Email confirmation</h3><p>Send and inspect the order email after successful payment.</p></div>
+          <a class="secondary-button email-draft-link" id="email-draft-link" href="#" target="_blank" rel="noreferrer">Open email draft</a>
+          <p id="email-status" class="integration-status">No order email sent yet</p>
+          <pre id="email-output" class="code-output">Waiting for a completed order...</pre>
+        </article>
+        <article class="integration-card">
+          <div class="integration-icon webhook-icon">HOOK</div>
+          <div><h3>Webhook receiver</h3><p>Send sample order events and inspect the received payload.</p></div>
+          <button class="secondary-button" id="send-webhook" type="button">Send order event</button>
+          <pre id="webhook-output" class="code-output">Waiting for an event...</pre>
+        </article>
+      </div>
+      <div class="api-lab">
+        <div class="api-lab-header"><div><p class="eyebrow">Mock REST client</p><h3>Request builder</h3></div><span class="api-base-url">/mock-api</span></div>
+        <form id="api-form" class="api-form">
+          <label>Method<select id="api-method"><option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option></select></label>
+          <label>Endpoint<select id="api-endpoint"><option value="/products">/products</option><option value="/orders/1001">/orders/1001</option><option value="/users/me">/users/me</option><option value="/health">/health</option></select></label>
+          <button class="primary-button" type="submit">Send request <span>→</span></button>
+        </form>
+        <pre id="api-response" class="code-output">Run a request to see the mock response.</pre>
+      </div>
+      <div class="security-lab">
+        <div><p class="eyebrow">Safe VAPT practice</p><h3>Security scenarios</h3><p class="muted">These are local response simulations, not real attacks or external scans.</p></div>
+        <div class="security-actions"><button class="scenario-button" data-scenario="invalid-login" type="button">Invalid login</button><button class="scenario-button" data-scenario="expired-token" type="button">Expired token</button><button class="scenario-button" data-scenario="rate-limit" type="button">Rate limit</button><button class="scenario-button" data-scenario="validation" type="button">Input validation</button></div>
+        <p id="security-result" class="security-result">Choose a scenario to inspect the expected response.</p>
+      </div>
     </section>
 
     <section id="cart-section" class="drawer-section" hidden>
@@ -141,7 +202,7 @@
           </label>
           <label>
             Card number
-            <input id="card-number" type="text" inputmode="numeric" placeholder="4242 4242 4242 4242" minlength="12" required />
+            <input id="card-number" type="text" inputmode="numeric" placeholder="Any 12 to 19 digit card number" minlength="12" maxlength="23" required />
           </label>
           <div class="form-row">
             <label>
@@ -172,6 +233,6 @@
     <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
   </main>
 
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=10"></script>
 </body>
 </html>
